@@ -11,7 +11,7 @@ This is a GAS project library for Google Apps Script (GAS).
 # Demo
 ![](help/ProjectApp_demo.gif)
 
-In this demonstration,  all scripts in a project are retrieved using ``getProjectBlob()``.
+In this demonstration, all scripts in a project are retrieved using ``getProjectBlob()``.
 
 <a name="Description"></a>
 # Description
@@ -24,10 +24,13 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
     1. Use Manifests.
     1. Use OAuth2 process.
 1. **Retrieve scripts in a project as Blob and JSON.**
+    - For Blob, you can retrieve each script in a project.
     - About this, scripts can be retrieved not only from [standalone scripts](https://developers.google.com/apps-script/guides/standalone), but also from [container-bound Scripts](https://developers.google.com/apps-script/guides/bound).
 1. **Create a project from Blob and JSON.**
+    - For Blob, you can create new project from a file or several files on Google Drive.
     - Standalone scripts can be created. But container-bound Scripts cannot be created.
 1. **Update a project from Blob and JSON.**
+    - For Blob, you can update the project using a file or several files on Google Drive.
     - Standalone scripts can be updated. But container-bound Scripts cannot be updated.
 
 # Library's project key
