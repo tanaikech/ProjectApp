@@ -15,7 +15,7 @@ In this demonstration, all scripts in a project are retrieved using ``getProject
 
 <a name="Description"></a>
 # Description
-There are Class SpreadsheetApp and Class DocumentApp for operating spreadsheet and document, respectively. But there is no Class for operating GAS project. If there is the Class ProjectApp, GAS project can be directly operated by GAS script. I thought that this will lead to new applications, and created ProjectApp.
+There are Class SpreadsheetApp and Class DocumentApp for operating spreadsheet and document, respectively. But there is no Class for operating GAS project. If there is such Class ProjectApp, GAS project can be directly operated by GAS script. I thought that this will lead to new applications, and created ProjectApp.
 
 On the other hand, as a CLI tool for operating GAS project, there has already been [ggsrun](https://github.com/tanaikech/ggsrun).
 
