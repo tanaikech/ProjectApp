@@ -58,12 +58,18 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
 ## Authorization using Manifests
 - On script editor
     - View -> Show manifest file
-- Add **"oauthScopes"** to "appsscript.json". If you add the default "appsscript.json", it becomes as follows. This timeZone is my current time zone.
+- Add **"oauthScopes"** to "appsscript.json". After you installed the library and added the scopes to the default "appsscript.json", it becomes as follows. This timeZone is my current time zone. <u>Of course, you can install the library by directly modifying "appsscript.json".</u>
 
 ~~~json
 {
   "timeZone": "Asia/Tokyo",
   "dependencies": {
+    "libraries": [{
+      "userSymbol": "ProjectApp",
+      "libraryId": "1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C",
+      "version": "1",
+      "developmentMode": true
+    }]
   },
   "exceptionLogging": "STACKDRIVER",
   "oauthScopes": [
@@ -108,12 +114,12 @@ Authorization is done. You can use ProjectApp.
 # Usage
 | Method | Return | Description |
 |:------|:------|:------|
-| getProjectBlob(projectId, zip) | []Blob | Retrieve scripts from a project as []Blob. **Each blob means each script in a project.** Scripts are returned as an array like ``[blob, blob, blob, ...]``. The blob can be seen using [``getDataAsString()``](https://developers.google.com/apps-script/reference/base/blob#getDataAsString()) and [``DriveApp.createFile(blob)``](https://developers.google.com/apps-script/reference/drive/drive-app#createFile(BlobSource)). ``zip`` is a boolean. If ``zip`` is true, scripts are returned as blob of a zip file. |
-| createProjectByBlob(projectname, blob, folderId) | Object | Create a project from []Blob. **Each blob means each script in a project.** So if you have a script which is a file of sample.gs, you can use as a blob using ``DriveApp.getFileById("### file id of sample.gs ###").getBlob()``. |
-| updateProjectByBlob(projectId, blob) | Object | Update existing project using []Blob. **Each blob means each script in a project.** So if you have a script which is a file of sample.gs, you can use as a blob using ``DriveApp.getFileById("### file id of sample.gs ###").getBlob()``. |
-| getProjectRaw(projectId) | []Object | Retrieve scripts from a project as []Object. The structure of []Object is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). |
-| createProjectByRaw(projectname, raw, folderId) | Object | Create a project from []Object. The structure of []Object is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). |
-| updateProjectByRaw(projectId, raw) | Object | Update existing project using []Object. The structure of []Object is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). **In this method, all scripts in a project is overwritten by raw data (JSON).** |
+| getProjectBlob(projectId, zip) | Blob[] | Retrieve scripts from a project as Blob[]. **Each blob means each script in a project.** Scripts are returned as an array like ``[blob, blob, blob, ...]``. The blob can be seen using [``getDataAsString()``](https://developers.google.com/apps-script/reference/base/blob#getDataAsString()) and [``DriveApp.createFile(blob)``](https://developers.google.com/apps-script/reference/drive/drive-app#createFile(BlobSource)). ``zip`` is a boolean. If ``zip`` is true, scripts are returned as blob of a zip file. |
+| createProjectByBlob(projectname, blob, folderId) | Object | Create a project from Blob[]. **Each blob means each script in a project.** So if you have a script which is a file of sample.gs, you can use as a blob using ``DriveApp.getFileById("### file id of sample.gs ###").getBlob()``. |
+| updateProjectByBlob(projectId, blob) | Object | Update existing project using Blob[]. **Each blob means each script in a project.** So if you have a script which is a file of sample.gs, you can use as a blob using ``DriveApp.getFileById("### file id of sample.gs ###").getBlob()``. |
+| getProjectRaw(projectId) | Object[] | Retrieve scripts from a project as Object[]. The structure of Object[] is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). |
+| createProjectByRaw(projectname, raw, folderId) | Object | Create a project from Object[]. The structure of Object[] is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). |
+| updateProjectByRaw(projectId, raw) | Object | Update existing project using Object[]. The structure of Object[] is [here](https://developers.google.com/apps-script/guides/import-export#export_projects_from_drive). **In this method, all scripts in a project is overwritten by raw data (JSON).** |
 
 You can also see the documents at the following URL.
 
@@ -183,6 +189,9 @@ Logger.log(res)
 ~~~
 
 I think that a new installer can be created by using this.
+
+# Applications using ProjectApp
+- [ManifestsApp](https://github.com/tanaikech/ManifestsApp)
 
 <a name="Licence"></a>
 # Licence
