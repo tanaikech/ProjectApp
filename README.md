@@ -42,7 +42,16 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
 **This installation document is a simple. If you want to see the detail of installation, please click each link.**
 
 - [Install Library to Use ProjectApp](help/README.md#InstallLibrarytoUseProjectApp)
-    - Script ID is **``1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C``**.
+    - Library's project key is **``1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C``**.
+- [Enable Drive API at API console](https://console.developers.google.com/apis/api/drive/overview)
+    - On script editor
+    - Resources -> Cloud Platform project
+    - View API console
+    - At Getting started, click Enable APIs and get credentials like keys.
+    - At left side, click Library.
+    - At Search for APIs & services, input **Drive API**. And click Google Drive API.
+    - Click Enable button.
+        - If it has already been enabled, please don't turn off.
 
 **About authorization, you can select one of following 2 methods.** I recommend to use [Manifests](https://developers.google.com/apps-script/concepts/manifests). This was added by [Google update at October 24, 2017](https://developers.google.com/apps-script/).
 
