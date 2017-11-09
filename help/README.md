@@ -8,7 +8,7 @@
     - Add library
     - Please select latest version
     - Developer mode ON (If you don't want to use latest version, please select others.)
-    - Identifier is "**``CreateProjectByGitHub``**". This is set under the default.
+    - Identifier is "**``ProjectApp``**". This is set under the default.
 
 [If you want to read about Libraries, please check this.](https://developers.google.com/apps-script/guide_libraries).
 
