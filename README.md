@@ -58,7 +58,7 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
 ## Authorization using Manifests
 - On script editor
     - View -> Show manifest file
-- Add **"oauthScopes"** to "appsscript.json". After you installed the library and added the scopes to the default "appsscript.json", it becomes as follows. This timeZone is my current time zone. <u>Of course, you can install the library by directly modifying "appsscript.json".</u>
+- Add **"oauthScopes"** to "appsscript.json". After you installed the library and added the scopes to the default "appsscript.json", it becomes as follows. This timeZone is my current time zone. Of course, you can install the library by directly modifying "appsscript.json".
 
 ~~~json
 {
@@ -184,7 +184,7 @@ var json = {
 var blob = Utilities.newBlob(JSON.stringify(json, null, "\t")).setName("appsscript.json");
 var blob = [blob];
 var res = pa.createProjectByBlob("### Project name ###", blob, "### Project ID ###");
-// var res = pa.updateProjectByBlob(projectId, blob); // If this is used, the Manifects in the existing project is updated.
+// var res = pa.updateProjectByBlob(projectId, blob); // If this is used, the Manifests in the existing project is updated.
 Logger.log(res)
 ~~~
 
