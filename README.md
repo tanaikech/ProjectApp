@@ -41,9 +41,9 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
 # How to install
 **This installation document is a simple. If you want to see the detail of installation, please click each link.**
 
-- [Install Library to Use ProjectApp](help/README.md#InstallLibrarytoUseProjectApp)
+1. [Install Library to Use ProjectApp](help/README.md#InstallLibrarytoUseProjectApp)
     - Library's project key is **``1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C``**.
-- [Enable Drive API at API console](https://console.developers.google.com/apis/api/drive/overview)
+1. [Enable Drive API at API console](https://console.developers.google.com/apis/api/drive/overview)
     - On script editor
     - Resources -> Cloud Platform project
     - View API console
@@ -53,62 +53,12 @@ On the other hand, as a CLI tool for operating GAS project, there has already be
     - Click Enable button.
         - If it has already been enabled, please don't turn off.
 
-**About authorization, you can select one of following 2 methods.** I recommend to use [Manifests](https://developers.google.com/apps-script/concepts/manifests). This was added by [Google update at October 24, 2017](https://developers.google.com/apps-script/).
+<u>Installing is done! You can use ProjectApp.</u>
 
-## Authorization using Manifests
-- On script editor
-    - View -> Show manifest file
-- Add **"oauthScopes"** to "appsscript.json". After you installed the library and added the scopes to the default "appsscript.json", it becomes as follows. This timeZone is my current time zone. Of course, you can install the library by directly modifying "appsscript.json".
+[In the case of an error related to scopes, please check here.](#QA)
 
-~~~json
-{
-  "timeZone": "Asia/Tokyo",
-  "dependencies": {
-    "libraries": [{
-      "userSymbol": "ProjectApp",
-      "libraryId": "1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C",
-      "version": "1",
-      "developmentMode": true
-    }]
-  },
-  "exceptionLogging": "STACKDRIVER",
-  "oauthScopes": [
-    "https://www.googleapis.com/auth/script.external_request",
-    "https://www.googleapis.com/auth/script.scriptapp",
-    "https://www.googleapis.com/auth/drive",
-    "https://www.googleapis.com/auth/drive.scripts"
-  ]
-}
-~~~
-
-Authorization is done. You can use ProjectApp.
-
-**[If you want to use some methods (for example, it is SpreadsheetApp.), which is required other scopes, in your script, please add the scopes to Manifests.](help/README.md#AddotherscopestoManifests)**
-
-## Authorization using OAuth2 process
-- [1. Retrieve client ID and client secret](help/README.md#RetrieveclientIDandclientsecret)
-    - Create new credential and Retrieve client ID and client secret at Google Cloud Platform
-- [2. Deploy Web Apps](help/README.md#DeployWebApps)
-    - Copy and paste the following script to the script editor installed the library. And input the retrieved client ID and secret.
-
-~~~javascript
-function doGet(e) {
-  var Properties = PropertiesService.getScriptProperties();
-  var pa = ProjectApp.init(Properties);
-  pa.setProp(
-    "", // <--- Input client_id
-    "" // <--- Input client_secret
-  );
-  return pa.getAccesstoken(e);
-}
-~~~
-- [3. Retrieve "Authorized redirect URIs" and Access Token](help/README.md#RetrieveAuthorizedredirectURIsandAccessToken)
-    - When Web Apps is launched by clicking **"latest code"** at "Deploy as Web Apps", you can retrieve redirect URI. Please add the redirect URI to the credential with the client ID and secret.
-    - Click Get access token and do authorization process.
-        - If you see <u>"The state token is invalid or has expired. Please try again."</u>, please close window. And click **"latest code"** again.
-    - When "Retrieving access token and refresh token was succeeded!" is displayed, the install is completed. You can use ProjectApp.
-
-Authorization is done. You can use ProjectApp.
+## About scopes
+About the install of scopes used at this library, users are not required to install scopes. Becasuse this library can automatically install the required scopes to the project which installed this library. The detail information about this can be seen at [here](https://gist.github.com/tanaikech/23ddf599a4155b66f1029978bba8153b).
 
 
 # Usage
@@ -183,7 +133,7 @@ var json = {
 };
 var blob = Utilities.newBlob(JSON.stringify(json, null, "\t")).setName("appsscript.json");
 var blob = [blob];
-var res = pa.createProjectByBlob("### Project name ###", blob, "### Project ID ###");
+var res = pa.createProjectByBlob("### Project name ###", blob, "### Folder ID ###");
 // var res = pa.updateProjectByBlob(projectId, blob); // If this is used, the Manifests in the existing project is updated.
 Logger.log(res)
 ~~~
@@ -192,6 +142,84 @@ I think that a new installer can be created by using this.
 
 # Applications using ProjectApp
 - [ManifestsApp](https://github.com/tanaikech/ManifestsApp)
+
+
+-----
+
+<a name="QA"></a>
+# Q & A
+## 1. If you need authorization by OAuth2
+Please confirm as follows.
+
+## Confirmation: 1
+- About the scope
+    - When you see the Scopes of project installed this library (**On script editor -> File -> Project properties -> Scopes**), if there are following scopes, the reason of error is not scopes.
+        - ``https://www.googleapis.com/auth/drive``
+        - ``https://www.googleapis.com/auth/drive.scripts``
+        - ``https://www.googleapis.com/auth/script.external_request``
+        - ``https://www.googleapis.com/auth/script.scriptapp``
+
+## Confirmation: 2
+If you cannot see above scopes at **On script editor -> File -> Project properties -> Scopes**, please do the following setting.
+
+**About authorization, you can select one of following 2 methods.** I recommend to use [Manifests](https://developers.google.com/apps-script/concepts/manifests). This was added by [Google update at October 24, 2017](https://developers.google.com/apps-script/).
+
+### Authorization using Manifests
+- On script editor
+    - View -> Show manifest file
+- Add **"oauthScopes"** to "appsscript.json". After you installed the library and added the scopes to the default "appsscript.json", it becomes as follows. This timeZone is my current time zone. Of course, you can install the library by directly modifying "appsscript.json".
+
+~~~json
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "ProjectApp",
+      "libraryId": "1l_XfWeEKp-g45lI-ikQ1KFrHX9YWlR2rWpaVMVs8miaa3J6PUYQqDo5C",
+      "version": "1",
+      "developmentMode": true
+    }]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/script.scriptapp",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/drive.scripts"
+  ]
+}
+~~~
+
+Authorization is done. You can use ProjectApp.
+
+**[If you want to use some methods (for example, it is SpreadsheetApp.), which is required other scopes, in your script, please add the scopes to Manifests.](help/README.md#AddotherscopestoManifests)**
+
+### Authorization using OAuth2 process
+- [1. Retrieve client ID and client secret](help/README.md#RetrieveclientIDandclientsecret)
+    - Create new credential and Retrieve client ID and client secret at Google Cloud Platform
+- [2. Deploy Web Apps](help/README.md#DeployWebApps)
+    - Copy and paste the following script to the script editor installed the library. And input the retrieved client ID and secret.
+
+~~~javascript
+function doGet(e) {
+  var Properties = PropertiesService.getScriptProperties();
+  var pa = ProjectApp.init(Properties);
+  pa.setProp(
+    "", // <--- Input client_id
+    "" // <--- Input client_secret
+  );
+  return pa.getAccesstoken(e);
+}
+~~~
+- [3. Retrieve "Authorized redirect URIs" and Access Token](help/README.md#RetrieveAuthorizedredirectURIsandAccessToken)
+    - When Web Apps is launched by clicking **"latest code"** at "Deploy as Web Apps", you can retrieve redirect URI. Please add the redirect URI to the credential with the client ID and secret.
+    - Click Get access token and do authorization process.
+        - If you see <u>"The state token is invalid or has expired. Please try again."</u>, please close window. And click **"latest code"** again.
+    - When "Retrieving access token and refresh token was succeeded!" is displayed, the install is completed. You can use ProjectApp.
+
+Authorization is done. You can use ProjectApp.
+
+
 
 <a name="Licence"></a>
 # Licence
@@ -208,5 +236,12 @@ If you have any questions and commissions for me, feel free to tell me.
 * v1.0.0 (November 8, 2017)
 
     Initial release.
+
+* v1.0.1 (November 23, 2017)
+
+    - Modified README.md
+        - It reported that scopes used at this library can automatically install.
+        - The detail information about this can be seen at [here](https://gist.github.com/tanaikech/23ddf599a4155b66f1029978bba8153b).
+
 
 [TOP](#TOP)
