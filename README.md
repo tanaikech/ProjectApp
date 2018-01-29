@@ -8,6 +8,9 @@ ProjectApp
 # Overview
 This is a GAS project library for Google Apps Script (GAS).
 
+## Note :
+**If you want to use a library which can be used for the projects of both standalone script type and container-bound script type, please use [ProjectApp2](https://github.com/tanaikech/ProjectApp2).**
+
 # Demo
 ![](help/ProjectApp_demo.gif)
 
